@@ -1,4 +1,5 @@
 import java.lang.System;
+import java.util.Random;
 
 public class Main {
 
@@ -26,7 +27,31 @@ public class Main {
 	 * @param dimensions number of dimensions in which a single points lives (D on the assignment sheet)
 	 **/
 	public static Point[] generateData(int clusters, int points, int dimensions) {
-		return new Point[points];
+		Point[] r_points = new Point[points];
+		Random r = new Random();
+		int cluster_id;
+		Point p;
+
+		double[][] cluster = new double[clusters][2];
+
+		for (int i=0; i<cluster.length; i++) {
+			double deviation = r.nextDouble() * 50;
+			double mean = r.nextDouble() * 100;
+			cluster[i][0] = deviation;
+			cluster[i][1] = mean;
+		}
+
+		for (int i=0; i<r_points.length; i++) {
+			cluster_id = r.nextInt(clusters);
+			p = new Point(dimensions);
+			p.original_category = cluster_id;
+			for (int d=0; d<dimensions; d++) {
+				p.values[d] = r.nextGaussian() * cluster[cluster_id][0] + cluster[cluster_id][1];
+			}
+			r_points[i] = p;
+		}
+
+		return r_points;
 	}
 
 	/**

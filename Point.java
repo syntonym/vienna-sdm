@@ -1,6 +1,7 @@
 public class Point {
-	public float[] values;
+	public double[] values;
 	public int category;
+	public int original_category;
 
 	/**
 	 * represents a single point. 
@@ -14,7 +15,8 @@ public class Point {
 	 * @param dimensions amount of dimensions the points lives in.
 	 **/
 	public Point(int dimensions) {
-		this.values = new float[dimensions];
+		this.values = new double[dimensions];
 		this.category = -1;
+		this.original_category = -1;
 	}
 }
