@@ -2,10 +2,19 @@ import java.lang.System;
 
 public class Main {
 
+	public enum Strategy {
+		LLOYD, MACQUEEN
+	}
+
+	public enum Initialisation {
+		RANDOM_PARTITION,
+		RANDOM_CLUSTER_CENTERS
+	}
+
 	public static void main(String[] args) {
 		int dimensions = 2;
 		Point[] points = generateData(5, 200, dimensions);
-		algoKMeans(points);
+		algoKMeans(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD);
 		visualize(points);
 	}
 
@@ -34,7 +43,7 @@ public class Main {
 	 * @param points Array of points to cluster
 	 *
 	 **/
-	public static void algoKMeans(Point[] points) {
+	public static void algoKMeans(Point[] points, Initialisation initialisation, Strategy strategy) {
 	}
 
 	/**
