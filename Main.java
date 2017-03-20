@@ -85,6 +85,9 @@ public class Main {
 	 *
 	 **/
 	public static void algoKMeans(Point[] points, Initialisation initialisation, Strategy strategy) {
+		for (Point point: points) {
+			point.category = point.original_category;
+		}
 	}
 
 	/**
