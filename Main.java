@@ -17,6 +17,7 @@ public class Main {
 		int n = 10000;
 		int k = 4;
 		Point[] points = generateData(k, n, dimensions);
+		algoKMeans(points, Initialisation.RANDOM_CLUSTER_CENTERS, Strategy.LLOYD, k, n);
 		algoKMeans(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD, k, n);
 		visualize(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD);
 	}
@@ -88,7 +89,7 @@ public class Main {
 	 **/
 	public static void algoKMeans(Point[] points, Initialisation initialisation, Strategy strategy, int k, int n) {
 
-		if (strategy == Strategy.LLOYD) {
+		if (strategy == Strategy.LLOYD && initialisation == Initialisation.RANDOM_CLUSTER_CENTERS) {
 
 			Point[] centroids = new Point[k];
 			for (int z = 0; z<k; z++) centroids[z] = new Point(2);
@@ -109,7 +110,7 @@ public class Main {
 			}
 
 			Boolean change = true;
-			int count = 0;
+			//int count = 0;
 
 			//iterate until there is no change in category
 			while (change) {
@@ -164,11 +165,96 @@ public class Main {
 	
 				}
 			
+				//count++;
+				//System.out.println("Iterate " + count + "\n");
+	
+			}
+
+		} else {
+			if (strategy == Strategy.LLOYD && initialisation == Initialisation.RANDOM_PARTITION) {
+				Point[] centroids = new Point[k];
+				for (int z = 0; z<k; z++) {
+					centroids[z] = new Point(2);
+					centroids[z].category = z;
+				}
+
+				int randomIndex;
+				int i = 0;
+
+				//random partition to clusters
+				for (int a=0; a<n; a++) {
+					points[a].category = (int) ((Math.random()*k));
+				}
+				
+				Boolean change = true;
+				int count = 0;
+
+				//iterate until there is no change in category
+				while (change) {
+
+					change = false;
+
+					//Neu Berechnung der Centroide
+
+					for (int z=0; z<2; z++) { //2 <- dimensions
+						for (int y = 0; y<k; y++) {
+							double mean = 0;
+							double elementCount = 0;
+	
+							for (int j = 0; j<n; j++) {
+								if (points[j].category == y) {
+									mean += points[j].values[z];
+									elementCount++;
+								}
+							}	
+							centroids[y].values[z] = mean / elementCount;
+	
+						}
+	
+					}
+
+					//Zuordnung der Datenpunkte
+					for (int j = 0; j<n; j++) {
+
+						double distance = Double.MAX_VALUE;
+						double distance_old;
+						double[] vector = new double[2];
+						points[j].original_category = points[j].category;
+
+						for (int l = 0; l < k; l++) {
+
+							distance_old = distance;
+							vector[0] = centroids[l].values[0] - points[j].values[0];
+							vector[1] = centroids[l].values[1] - points[j].values[1];
+
+							//distance between point and centroid
+							distance = Math.sqrt(Math.pow(vector[0],2) + Math.pow(vector[1],2));
+			
+							if (distance < distance_old) {
+								points[j].category = centroids[l].category;
+								distance_old = distance;
+							}
+						}
+	
+						if (points[j].category != points[j].original_category) {
+								change = true;
+						}
+				}
+			
 				count++;
 				System.out.println("Iterate " + count + "\n");
 	
 			}
+			} else {
+				if (strategy == Strategy.MACQUEEN && initialisation == Initialisation.RANDOM_CLUSTER_CENTERS) {
+					//
+				} else {
+					if (strategy == Strategy.MACQUEEN && initialisation == Initialisation.RANDOM_PARTITION) {
+						//
+					}	
+				}
 
+			}
 		}
 
 	}
