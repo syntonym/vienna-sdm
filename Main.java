@@ -14,8 +14,10 @@ public class Main {
 
 	public static void main(String[] args) {
 		int dimensions = 2;
-		Point[] points = generateData(4, 1000, dimensions);
-		algoKMeans(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD);
+		int n = 1000;
+		int k = 4;
+		Point[] points = generateData(k, n, dimensions);
+		algoKMeans(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD, k, n);
 		visualize(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD);
 	}
 
@@ -84,10 +86,62 @@ public class Main {
 	 * @param points Array of points to cluster
 	 *
 	 **/
-	public static void algoKMeans(Point[] points, Initialisation initialisation, Strategy strategy) {
-		for (Point point: points) {
-			point.category = point.original_category;
+	public static void algoKMeans(Point[] points, Initialisation initialisation, Strategy strategy, int k, int n) {
+
+		if (strategy == Strategy.LLOYD) {
+
+			Point[] centroids = new Point[k];
+			for (int z = 0; z<k; z++) centroids[z] = new Point(2);
+			int randomIndex;
+			int i = 0;
+
+			//find k random start centroids
+			while (i<k) {
+				randomIndex = (int) ((Math.random()*n));
+
+				if (points[randomIndex].category == -1) {
+					centroids[i].values[0] = points[randomIndex].values[0];
+					centroids[i].values[1] = points[randomIndex].values[1];
+					centroids[i].category = i;
+					points[randomIndex].category = i++;
+				}
+
+				//System.out.println("Centroid " + (i-1) + " = " + centroids[i-1].values[0] + ", " + centroids[i-1].values[1] + "\n");
+
+			}
+
+			//Zuordnung der Datenpunkte
+			for (int j = 0; j<n; j++) {
+
+				double distance = Double.MAX_VALUE;
+				double distance_old;
+				double[] vector = new double[2];
+
+				for (int l = 0; l < k; l++) {
+
+					distance_old = distance;
+					vector[0] = centroids[l].values[0] - points[j].values[0];
+					vector[1] = centroids[l].values[1] - points[j].values[1];
+
+					//distance between point and centroid
+					distance = Math.sqrt(Math.pow(vector[0],2) + Math.pow(vector[1],2));
+			
+					if (distance < distance_old) {
+						points[j].category = centroids[l].category;
+						distance_old = distance;
+					}
+
+				}
+
+
+			}
+
 		}
+
+		//for (int lol=0; lol<100; lol++) {
+			//System.out.println("Point " + lol + " cat = " + points[lol].category + "\n");
+		//}
+
 	}
 
 	/**
