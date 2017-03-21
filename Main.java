@@ -14,7 +14,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		int dimensions = 2;
-		int n = 1000;
+		int n = 10000;
 		int k = 4;
 		Point[] points = generateData(k, n, dimensions);
 		algoKMeans(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD, k, n);
@@ -108,7 +108,13 @@ public class Main {
 
 			}
 
-			for (int it=0; it<5; it++) {
+			Boolean change = true;
+			int count = 0;
+
+			//iterate until there is no change in category
+			while (change) {
+
+				change = false;
 
 				//Zuordnung der Datenpunkte
 				for (int j = 0; j<n; j++) {
@@ -116,6 +122,7 @@ public class Main {
 					double distance = Double.MAX_VALUE;
 					double distance_old;
 					double[] vector = new double[2];
+					points[j].original_category = points[j].category;
 
 					for (int l = 0; l < k; l++) {
 
@@ -130,7 +137,10 @@ public class Main {
 							points[j].category = centroids[l].category;
 							distance_old = distance;
 						}
+					}
 
+					if (points[j].category != points[j].original_category) {
+							change = true;
 					}
 				}
 
@@ -152,7 +162,11 @@ public class Main {
 	
 					}
 	
-				}	
+				}
+			
+				count++;
+				System.out.println("Iterate " + count + "\n");
+	
 			}
 
 		}
