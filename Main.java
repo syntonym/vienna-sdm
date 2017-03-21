@@ -106,41 +106,56 @@ public class Main {
 					points[randomIndex].category = i++;
 				}
 
-				//System.out.println("Centroid " + (i-1) + " = " + centroids[i-1].values[0] + ", " + centroids[i-1].values[1] + "\n");
-
 			}
 
-			//Zuordnung der Datenpunkte
-			for (int j = 0; j<n; j++) {
+			for (int it=0; it<5; it++) {
 
-				double distance = Double.MAX_VALUE;
-				double distance_old;
-				double[] vector = new double[2];
+				//Zuordnung der Datenpunkte
+				for (int j = 0; j<n; j++) {
 
-				for (int l = 0; l < k; l++) {
+					double distance = Double.MAX_VALUE;
+					double distance_old;
+					double[] vector = new double[2];
 
-					distance_old = distance;
-					vector[0] = centroids[l].values[0] - points[j].values[0];
-					vector[1] = centroids[l].values[1] - points[j].values[1];
+					for (int l = 0; l < k; l++) {
 
-					//distance between point and centroid
-					distance = Math.sqrt(Math.pow(vector[0],2) + Math.pow(vector[1],2));
-			
-					if (distance < distance_old) {
-						points[j].category = centroids[l].category;
 						distance_old = distance;
-					}
+						vector[0] = centroids[l].values[0] - points[j].values[0];
+						vector[1] = centroids[l].values[1] - points[j].values[1];
 
+						//distance between point and centroid
+						distance = Math.sqrt(Math.pow(vector[0],2) + Math.pow(vector[1],2));
+			
+						if (distance < distance_old) {
+							points[j].category = centroids[l].category;
+							distance_old = distance;
+						}
+
+					}
 				}
 
 
+				//Neu Berechnung der Centroide
+
+				for (int z=0; z<2; z++) { //2 <- dimensions
+					for (int y = 0; y<k; y++) {
+						double mean = 0;
+						double elementCount = 0;
+	
+						for (int j = 0; j<n; j++) {
+							if (points[j].category == y) {
+								mean += points[j].values[z];
+								elementCount++;
+							}
+						}
+						centroids[y].values[z] = mean / elementCount;
+	
+					}
+	
+				}	
 			}
 
 		}
-
-		//for (int lol=0; lol<100; lol++) {
-			//System.out.println("Point " + lol + " cat = " + points[lol].category + "\n");
-		//}
 
 	}
 
