@@ -15,9 +15,9 @@ public class Main {
 	public static void main(String[] args) {
 		int dimensions = 2;
 		int n = 1000;
-		int k = 4;
+		int k = 2;
 		Point[] points = generateData(k, n, dimensions);
-		algoKMeans(points, Initialisation.RANDOM_PARTITION, Strategy.MACQUEEN, k, n);
+		algoKMeans(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD, k, n);
 		//algoKMeans(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD, k, n);
 		visualize(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD, n, k);
 	}
@@ -92,7 +92,7 @@ public class Main {
 		if (strategy == Strategy.LLOYD && initialisation == Initialisation.RANDOM_CLUSTER_CENTERS) {
 
 			Point[] centroids = new Point[k];
-			for (int z = 0; z<k; z++) centroids[z] = new Point(2);
+			for (int z = 0; z<k; z++) centroids[z] = new Point(points[0].dim);
 			int randomIndex;
 			int i = 0;
 
@@ -101,8 +101,10 @@ public class Main {
 				randomIndex = (int) ((Math.random()*n));
 
 				if (points[randomIndex].category == -1) {
-					centroids[i].values[0] = points[randomIndex].values[0];
-					centroids[i].values[1] = points[randomIndex].values[1];
+
+					for (int l=0; l<points[randomIndex].dim; l++) {
+						centroids[i].values[l] = points[randomIndex].values[l];
+					}
 					centroids[i].category = i;
 					points[randomIndex].category = i++;
 				}
@@ -122,14 +124,15 @@ public class Main {
 
 					double distance = Double.MAX_VALUE;
 					double distance_old;
-					double[] vector = new double[2];
+					double[] vector = new double[points[0].dim];
 					points[j].original_category = points[j].category;
 
 					for (int l = 0; l < k; l++) {
 
 						distance_old = distance;
-						vector[0] = centroids[l].values[0] - points[j].values[0];
-						vector[1] = centroids[l].values[1] - points[j].values[1];
+						for (int b=0; b<points[0].dim; b++) {	
+							vector[b] = centroids[l].values[b] - points[j].values[b];
+						}
 
 						//distance between point and centroid
 						distance = Math.sqrt(Math.pow(vector[0],2) + Math.pow(vector[1],2));
@@ -174,7 +177,7 @@ public class Main {
 			if (strategy == Strategy.LLOYD && initialisation == Initialisation.RANDOM_PARTITION) {
 				Point[] centroids = new Point[k];
 				for (int z = 0; z<k; z++) {
-					centroids[z] = new Point(2);
+					centroids[z] = new Point(points[0].dim);
 					centroids[z].category = z;
 				}
 
@@ -217,14 +220,15 @@ public class Main {
 
 						double distance = Double.MAX_VALUE;
 						double distance_old;
-						double[] vector = new double[2];
+						double[] vector = new double[points[0].dim];
 						points[j].original_category = points[j].category;
 
 						for (int l = 0; l < k; l++) {
 
 							distance_old = distance;
-							vector[0] = centroids[l].values[0] - points[j].values[0];
-							vector[1] = centroids[l].values[1] - points[j].values[1];
+							for (int b=0; b<points[0].dim; b++) {
+								vector[b] = centroids[l].values[b] - points[j].values[b];
+							}
 
 							//distance between point and centroid
 							distance = Math.sqrt(Math.pow(vector[0],2) + Math.pow(vector[1],2));
@@ -244,7 +248,7 @@ public class Main {
 			} else {
 				if (strategy == Strategy.MACQUEEN && initialisation == Initialisation.RANDOM_CLUSTER_CENTERS) {
 					Point[] centroids = new Point[k];
-					for (int z = 0; z<k; z++) centroids[z] = new Point(2);
+					for (int z = 0; z<k; z++) centroids[z] = new Point(points[0].dim);
 					int randomIndex;
 					int i = 0;
 
@@ -253,8 +257,9 @@ public class Main {
 						randomIndex = (int) ((Math.random()*n));
 
 						if (points[randomIndex].category == -1) {
-							centroids[i].values[0] = points[randomIndex].values[0];
-							centroids[i].values[1] = points[randomIndex].values[1];
+							for (int l=0; l<points[0].dim; l++) {
+								centroids[i].values[l] = points[randomIndex].values[l];
+							}
 							centroids[i].category = i;
 							points[randomIndex].category = i++;
 						}
@@ -274,14 +279,15 @@ public class Main {
 
 							double distance = Double.MAX_VALUE;
 							double distance_old;
-							double[] vector = new double[2];
+							double[] vector = new double[points[0].dim];
 							points[j].original_category = points[j].category;
 
 							for (int l = 0; l < k; l++) {
 
 								distance_old = distance;
-								vector[0] = centroids[l].values[0] - points[j].values[0];
-								vector[1] = centroids[l].values[1] - points[j].values[1];
+								for (int b=0; b<points[0].dim; b++) {
+									vector[b] = centroids[l].values[b] - points[j].values[b];
+								}
 
 								//distance between point and centroid
 								distance = Math.sqrt(Math.pow(vector[0],2) + Math.pow(vector[1],2));
@@ -325,7 +331,7 @@ public class Main {
 						
 						Point[] centroids = new Point[k];
 						for (int z = 0; z<k; z++) {
-							centroids[z] = new Point(2);
+							centroids[z] = new Point(points[0].dim);
 							centroids[z].category = z;
 						}
 
@@ -375,8 +381,9 @@ public class Main {
 								for (int l = 0; l < k; l++) {
 
 									distance_old = distance;
-									vector[0] = centroids[l].values[0] - points[j].values[0];
-									vector[1] = centroids[l].values[1] - points[j].values[1];
+									for (int b=0; b<points[0].dim; b++) {
+										vector[b] = centroids[l].values[b] - points[j].values[b];
+									}
 
 									//distance between point and centroid
 									distance = Math.sqrt(Math.pow(vector[0],2) + Math.pow(vector[1],2));

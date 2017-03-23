@@ -8,6 +8,9 @@ public class Point {
 	// original centroid
 	public int original_category;
 
+	//dimension of the data
+	public int dim;
+
 	/**
 	 * represents a single point. 
 	 *
@@ -23,5 +26,6 @@ public class Point {
 		this.values = new double[dimensions];
 		this.category = -1;
 		this.original_category = -1;
+		this.dim = dimensions;
 	}
 }
