@@ -1,4 +1,5 @@
 import processing.core.*;
+import java.util.*;
 
 public class Visualizer extends PApplet
 {
@@ -12,11 +13,30 @@ public class Visualizer extends PApplet
     
     private static Point [] points = new Point[0];
     
+    private int[][] colors =
+        {
+            {255, 0, 0},
+            {0, 255, 0},
+            {0, 0, 255},
+            {128, 128, 0},
+            {128, 0, 128},
+            {0, 128, 128},
+            {128, 64, 64},
+            {64, 128, 64},
+            {64, 64, 128},
+        };
+    
     public Visualizer () {
     
     }
     
-    public static void setInformation (String strategy, String initialisation, String n, String k, Point [] pointsBla) {
+    public static void setInformation (
+        String strategy, 
+        String initialisation, 
+        String n, 
+        String k, 
+        Point [] pointsBla
+    ) {
         strategyName = strategy;
         initialisationName = initialisation;
         nString = n;
@@ -70,13 +90,16 @@ public class Visualizer extends PApplet
     }
 
     public void draw(){
-        fill (255,127,0);
+        fill (0);
 
         for (int i = 0; i < points.length; i++) {
-            if (points[i].category == 0) fill (200,0,0);
-            if (points[i].category == 1) fill (0,200,0);
-            if (points[i].category == 2) fill (0,0,200);
-            if (points[i].category == 3) fill (100,0,100);
+            if (points[i].category >= 0) {
+                fill(
+                    colors[points[i].category][0],
+                    colors[points[i].category][1],
+                    colors[points[i].category][2]
+                );
+            }
             
             ellipse(new Float(points[i].values[0]), new Float(points[i].values[1]), 3, 3);
         }

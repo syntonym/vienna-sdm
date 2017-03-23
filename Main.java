@@ -1,5 +1,6 @@
 import java.lang.System;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
 
@@ -13,15 +14,35 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		int n = Integer.parseInt(args[0]);
-		int dimensions = Integer.parseInt(args[1]);
-		int k = (int) Integer.parseInt(args[2]);
-		Strategy strat= Strategy.valueOf(args[3]);
-		Initialisation init = Initialisation.valueOf(args[4]);
+	    int n;
+	    int dimensions;
+	    int k;
+	    Strategy strat;
+	    Initialisation init;
+	    
+	    if (args.length == 5) {
+		    n = Integer.parseInt(args[0]);
+		    dimensions = Integer.parseInt(args[1]);
+		    k = (int) Integer.parseInt(args[2]);
+		    strat= Strategy.valueOf(args[3]);
+		    init = Initialisation.valueOf(args[4]);
+	    } else {
+	        n = 1000;
+	        dimensions = 2;
+	        k = 4;
+	        strat = Strategy.LLOYD;
+	        init = Initialisation.RANDOM_PARTITION;
+	    }
+		
 		Point[] points = generateData(k, n, dimensions);
-		algoKMeans(points, init, strat, k, n);
 		//algoKMeans(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD, k, n);
 		visualize(points, init, strat, n, k);
+
+        Scanner reader = new Scanner(System.in);  // Reading from System.in
+        System.out.println("Enter a number: ");
+        k = reader.nextInt(); // Scans the next token of the input as an int.
+
+		algoKMeans(points, init, strat, k, n);
 	}
 
 	/**
@@ -464,8 +485,6 @@ public class Main {
         
         
 	    Visualizer.main("Visualizer");
-	    
-	    
 	}
 }
 
