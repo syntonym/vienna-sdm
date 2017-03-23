@@ -1,5 +1,6 @@
 import java.lang.System;
 import java.util.Random;
+import processing.core.*;
 
 public class Main {
 
@@ -16,10 +17,11 @@ public class Main {
 		int dimensions = 2;
 		int n = 10000;
 		int k = 4;
+				
 		Point[] points = generateData(k, n, dimensions);
 		algoKMeans(points, Initialisation.RANDOM_CLUSTER_CENTERS, Strategy.LLOYD, k, n);
 		algoKMeans(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD, k, n);
-		visualize(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD);
+		visualize(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD, n, k);
 	}
 
 	/**
@@ -277,7 +279,11 @@ public class Main {
 	 * @param initialisation strategy to initialisation k-means algo
 	 * @param strategy       strategy to update k-means algo
 	 **/
-	public static void visualize(Point[] points, Initialisation initialisation, Strategy strategy) {
+	public static void visualize(Point[] points, Initialisation initialisation, Strategy strategy, int n, int k) {
+	    System.out.println("line missing");
+	    Visualizer visualizer = new Visualizer();
+	    Visualizer.setInformation(strategy.name(), initialisation.name(), new Integer(n).toString(), new Integer(k).toString());
+	    Visualizer.main("Visualizer");
 	}
 }
 

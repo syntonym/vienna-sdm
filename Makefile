@@ -1,13 +1,13 @@
 :PHONY: run clean
 
 %.class: %.java
-	javac $<
+	javac -cp "core.jar:." $<
 
 run: main.jar
-	java -jar main.jar
+	java -cp "core.jar:." -jar main.jar
 
 clean:
-	rm *.jar
+	rm main.jar
 	rm *.class
 
 main.jar: Main.class Point.class
