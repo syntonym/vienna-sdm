@@ -13,13 +13,15 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		int dimensions = 2;
-		int n = 1000;
-		int k = 2;
+		int n = Integer.parseInt(args[0]);
+		int dimensions = Integer.parseInt(args[1]);
+		int k = (int) Integer.parseInt(args[2]);
+		Strategy strat= Strategy.valueOf(args[3]);
+		Initialisation init = Initialisation.valueOf(args[4]);
 		Point[] points = generateData(k, n, dimensions);
-		algoKMeans(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD, k, n);
+		algoKMeans(points, init, strat, k, n);
 		//algoKMeans(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD, k, n);
-		visualize(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD, n, k);
+		visualize(points, init, strat, n, k);
 	}
 
 	/**
