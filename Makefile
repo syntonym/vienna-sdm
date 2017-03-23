@@ -7,7 +7,7 @@ run: main.jar
 	java -jar main.jar
 
 clean:
-	rm *.jar
+	rm main.jar
 	rm *.class
 
 main.jar: Main.class Point.class
