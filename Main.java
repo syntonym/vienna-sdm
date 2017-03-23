@@ -19,7 +19,7 @@ public class Main {
 		Point[] points = generateData(k, n, dimensions);
 		algoKMeans(points, Initialisation.RANDOM_PARTITION, Strategy.MACQUEEN, k, n);
 		//algoKMeans(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD, k, n);
-		visualize(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD);
+		visualize(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD, n, k);
 	}
 
 	/**
@@ -441,7 +441,22 @@ public class Main {
 	 * @param initialisation strategy to initialisation k-means algo
 	 * @param strategy       strategy to update k-means algo
 	 **/
-	public static void visualize(Point[] points, Initialisation initialisation, Strategy strategy) {
+	public static void visualize(Point[] points, Initialisation initialisation, Strategy strategy, int n, int k) {
+	    System.out.println("line missing");
+	    Visualizer visualizer = new Visualizer();
+	    
+	    Visualizer.setInformation(
+	        strategy.name(), 
+	        initialisation.name(), 
+	        new Integer(n).toString(), 
+	        new Integer(k).toString(),
+	        points
+        );
+        
+        
+	    Visualizer.main("Visualizer");
+	    
+	    
 	}
 }
 

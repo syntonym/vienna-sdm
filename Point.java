@@ -1,6 +1,11 @@
 public class Point {
+    // dimensions
 	public double[] values;
+	
+	// centroid
 	public int category;
+	
+	// original centroid
 	public int original_category;
 
 	/**
