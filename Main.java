@@ -27,7 +27,7 @@ public class Main {
 		    strat= Strategy.valueOf(args[3]);
 		    init = Initialisation.valueOf(args[4]);
 	    } else {
-	        n = 1000;
+	        n = 4000;
 	        dimensions = 2;
 	        k = 4;
 	        strat = Strategy.LLOYD;
@@ -61,22 +61,27 @@ public class Main {
 		Point p;
 
 		if (deviation_max == 0.0) {
-			deviation_max = 33;
+			deviation_max = 5;
 		}
 		if (mean_max == 0.0) {
 			mean_max = 100;
 		}
 
-		double[][] cluster = new double[clusters][2];
+		double[][][] cluster = new double[clusters][2][dimensions];
 		double deviation;
 		double mean;
 
 		for (int i=0; i<cluster.length; i++) {
 
 			deviation = r.nextDouble() * deviation_max;
-			mean = r.nextDouble() * mean_max;
-			cluster[i][0] = deviation;
-			cluster[i][1] = mean;
+			cluster[i][0] = new double[1];
+			cluster[i][0][0] = deviation;
+			cluster[i][1] = new double[dimensions];
+
+			for (int k=0; k<dimensions; k++) {
+				mean = r.nextDouble() * mean_max;
+				cluster[i][1][k] = mean;
+			}
 		}
 
 		for (int i=0; i<r_points.length; i++) {
@@ -84,7 +89,7 @@ public class Main {
 			p = new Point(dimensions);
 			p.original_category = cluster_id;
 			for (int d=0; d<dimensions; d++) {
-				p.values[d] = r.nextGaussian() * cluster[cluster_id][0] + cluster[cluster_id][1];
+				p.values[d] = r.nextGaussian() * cluster[cluster_id][0][0] + cluster[cluster_id][1][d];
 			}
 			r_points[i] = p;
 		}
