@@ -20,7 +20,6 @@ public class Main {
 		Initialisation init = Initialisation.valueOf(args[4]);
 		Point[] points = generateData(k, n, dimensions);
 		algoKMeans(points, init, strat, k, n);
-		//algoKMeans(points, Initialisation.RANDOM_PARTITION, Strategy.LLOYD, k, n);
 		visualize(points, init, strat, n, k);
 	}
 
@@ -137,7 +136,10 @@ public class Main {
 						}
 
 						//distance between point and centroid
-						distance = Math.sqrt(Math.pow(vector[0],2) + Math.pow(vector[1],2));
+						distance = 0;
+						for (int c=0; c<points[0].dim; c++) {
+							distance += Math.sqrt(Math.pow(vector[c],2));
+						}
 			
 						if (distance < distance_old) {
 							points[j].category = centroids[l].category;
@@ -233,7 +235,10 @@ public class Main {
 							}
 
 							//distance between point and centroid
-							distance = Math.sqrt(Math.pow(vector[0],2) + Math.pow(vector[1],2));
+							distance = 0;
+							for (int c=0; c<points[0].dim; c++) {
+								distance += Math.sqrt(Math.pow(vector[c],2));
+							}
 			
 							if (distance < distance_old) {
 								points[j].category = centroids[l].category;
@@ -292,7 +297,10 @@ public class Main {
 								}
 
 								//distance between point and centroid
-								distance = Math.sqrt(Math.pow(vector[0],2) + Math.pow(vector[1],2));
+								distance = 0;
+								for (int c=0; c<points[0].dim; c++) {
+									distance += Math.sqrt(Math.pow(vector[c],2));
+								}
 			
 								if (distance < distance_old) {
 									points[j].category = centroids[l].category;
@@ -388,7 +396,10 @@ public class Main {
 									}
 
 									//distance between point and centroid
-									distance = Math.sqrt(Math.pow(vector[0],2) + Math.pow(vector[1],2));
+									distance = 0;
+									for (int c=0; c<points[0].dim; c++) {
+										distance += Math.sqrt(Math.pow(vector[c],2));
+									}
 			
 									if (distance < distance_old) {
 										points[j].category = centroids[l].category;
