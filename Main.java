@@ -150,13 +150,12 @@ public class Main {
 				for (int j = 0; j<n; j++) {
 
 					double distance = Double.MAX_VALUE;
-					double distance_old;
+					double distance_old = distance;
 					double[] vector = new double[points[0].dim];
 					points[j].category_change = points[j].category;
 
 					for (int l = 0; l < k; l++) {
 
-						distance_old = distance;
 						for (int b=0; b<points[0].dim; b++) {	
 							vector[b] = centroids[l].values[b] - points[j].values[b];
 						}
@@ -249,13 +248,12 @@ public class Main {
 					for (int j = 0; j<n; j++) {
 
 						double distance = Double.MAX_VALUE;
-						double distance_old;
+						double distance_old = distance;
 						double[] vector = new double[points[0].dim];
 						points[j].category_change = points[j].category;
 
 						for (int l = 0; l < k; l++) {
 
-							distance_old = distance;
 							for (int b=0; b<points[0].dim; b++) {
 								vector[b] = centroids[l].values[b] - points[j].values[b];
 							}
@@ -311,13 +309,12 @@ public class Main {
 						for (int j = 0; j<n; j++) {
 
 							double distance = Double.MAX_VALUE;
-							double distance_old;
+							double distance_old = distance;;
 							double[] vector = new double[points[0].dim];
 							points[j].category_change = points[j].category;
 
 							for (int l = 0; l < k; l++) {
 
-								distance_old = distance;
 								for (int b=0; b<points[0].dim; b++) {
 									vector[b] = centroids[l].values[b] - points[j].values[b];
 								}
@@ -410,13 +407,12 @@ public class Main {
 							for (int j = 0; j<n; j++) {
 
 								double distance = Double.MAX_VALUE;
-								double distance_old;
+								double distance_old = distance;
 								double[] vector = new double[2];
 								points[j].category_change = points[j].category;
 
 								for (int l = 0; l < k; l++) {
 
-									distance_old = distance;
 									for (int b=0; b<points[0].dim; b++) {
 										vector[b] = centroids[l].values[b] - points[j].values[b];
 									}
@@ -465,6 +461,10 @@ public class Main {
 				}
 
 			}
+		}
+
+		for (int index=0; index<n; index++) {
+			System.out.println("Point " + index + " Cluster " + points[index].category +"\n");
 		}
 
 	}
