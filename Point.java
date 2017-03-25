@@ -4,6 +4,9 @@ public class Point {
 	
 	// centroid
 	public int category;
+
+	//to check if a points changes its cluster partition
+	public int category_change;
 	
 	// original centroid
 	public int original_category;
@@ -26,6 +29,7 @@ public class Point {
 		this.values = new double[dimensions];
 		this.category = -1;
 		this.original_category = -1;
+		this.category_change = -1;
 		this.dim = dimensions;
 	}
 }
