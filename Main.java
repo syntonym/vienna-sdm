@@ -152,7 +152,7 @@ public class Main {
 					double distance = Double.MAX_VALUE;
 					double distance_old;
 					double[] vector = new double[points[0].dim];
-					points[j].original_category = points[j].category;
+					points[j].category_change = points[j].category;
 
 					for (int l = 0; l < k; l++) {
 
@@ -173,7 +173,7 @@ public class Main {
 						}
 					}
 
-					if (points[j].category != points[j].original_category) {
+					if (points[j].category != points[j].category_change) {
 							change = true;
 					}
 				}
@@ -251,7 +251,7 @@ public class Main {
 						double distance = Double.MAX_VALUE;
 						double distance_old;
 						double[] vector = new double[points[0].dim];
-						points[j].original_category = points[j].category;
+						points[j].category_change = points[j].category;
 
 						for (int l = 0; l < k; l++) {
 
@@ -272,7 +272,7 @@ public class Main {
 							}
 						}
 	
-						if (points[j].category != points[j].original_category) {
+						if (points[j].category != points[j].category_change) {
 								change = true;
 						}
 					}
@@ -313,7 +313,7 @@ public class Main {
 							double distance = Double.MAX_VALUE;
 							double distance_old;
 							double[] vector = new double[points[0].dim];
-							points[j].original_category = points[j].category;
+							points[j].category_change = points[j].category;
 
 							for (int l = 0; l < k; l++) {
 
@@ -334,7 +334,7 @@ public class Main {
 								}
 							}
 
-							if (points[j].category != points[j].original_category) {
+							if (points[j].category != points[j].category_change) {
 								change = true;
 				
 								//if there's a change -> calculate centroids
@@ -412,7 +412,7 @@ public class Main {
 								double distance = Double.MAX_VALUE;
 								double distance_old;
 								double[] vector = new double[2];
-								points[j].original_category = points[j].category;
+								points[j].category_change = points[j].category;
 
 								for (int l = 0; l < k; l++) {
 
@@ -433,7 +433,7 @@ public class Main {
 									}
 								}
 	
-								if (points[j].category != points[j].original_category) {
+								if (points[j].category != points[j].category_change) {
 										change = true;
 
 										//if there's a change -> calculate centroids
