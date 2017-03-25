@@ -10,7 +10,7 @@ clean:
 	rm main.jar
 	rm *.class
 
-main.jar: Main.class Point.class
+main.jar: Main.class Point.class Visualizer.class
 	jar cef Main main.jar *.class
 
 all: main.jar

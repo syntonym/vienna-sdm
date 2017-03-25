@@ -63,8 +63,8 @@ public class Visualizer extends PApplet
         System.out.println ("Min Y: " + min_y);
 */        
         for (int i = 0; i < points.length; i++) {
-            points[i].values[0] += (max_x - min_x);
-            points[i].values[1] += (max_y - min_y);
+	    points[i].values[0] += -min_x + 50;
+	    points[i].values[1] += -min_y + 50;
             points[i].values[0] *= 1024/(2*(max_x - min_x));
             points[i].values[1] *= 768/(2*(max_y - min_y));
         }
