@@ -35,12 +35,11 @@ public class Main {
 	    }
 		
 		Point[] points = generateData(k, n, dimensions);
-		algoKMeans(points, init, strat, k, n);
 		visualize(points, init, strat, n, k);
 
-        Scanner reader = new Scanner(System.in);  // Reading from System.in
-        System.out.println("Enter a number: ");
-        k = reader.nextInt(); // Scans the next token of the input as an int.
+        	Scanner reader = new Scanner(System.in);  // Reading from System.in
+        	System.out.println("Enter a number: ");
+        	k = reader.nextInt(); // Scans the next token of the input as an int.
 
 		algoKMeans(points, init, strat, k, n);
 	}
