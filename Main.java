@@ -1,6 +1,7 @@
 import java.lang.System;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -14,11 +15,14 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-	    int n;
-	    int dimensions;
-	    int k;
-	    Strategy strat;
-	    Initialisation init;
+		int n;
+		int dimensions;
+		int k;
+		Strategy strat;
+		Initialisation init;
+		ArrayList<Point[]> points_it = new ArrayList<Point[]>();
+		ArrayList<Point[]> centroid_it = new ArrayList<Point[]>();
+		
 	    
 	    if (args.length == 5) {
 		    n = Integer.parseInt(args[0]);
@@ -37,11 +41,11 @@ public class Main {
 		Point[] points = generateData(k, n, dimensions);
 		visualize(points, init, strat, n, k);
 
-        	Scanner reader = new Scanner(System.in);  // Reading from System.in
-        	System.out.println("Enter a number: ");
-        	k = reader.nextInt(); // Scans the next token of the input as an int.
+		Scanner reader = new Scanner(System.in);  // Reading from System.in
+		System.out.println("Enter a number: ");
+		k = reader.nextInt(); // Scans the next token of the input as an int.
 
-		algoKMeans(points, init, strat, k, n);
+		algoKMeans(points, init, strat, k, n, points_it, centroid_it);
 	}
 
 	/**
@@ -114,7 +118,7 @@ public class Main {
 	 * @param points Array of points to cluster
 	 *
 	 **/
-	public static void algoKMeans(Point[] points, Initialisation initialisation, Strategy strategy, int k, int n) {
+	public static void algoKMeans(Point[] points, Initialisation initialisation, Strategy strategy, int k, int n, ArrayList<Point[]> points_it, ArrayList<Point[]> centroid_it) {
 
 		if (strategy == Strategy.LLOYD && initialisation == Initialisation.RANDOM_CLUSTER_CENTERS) {
 
@@ -143,6 +147,8 @@ public class Main {
 
 			//iterate until there is no change in category
 			while (change) {
+
+				centroid_it.add(centroids);
 
 				change = false;
 
@@ -176,6 +182,8 @@ public class Main {
 							change = true;
 					}
 				}
+
+				points_it.add(points);
 
 
 				//Neu Berechnung der Centroide
@@ -217,6 +225,12 @@ public class Main {
 				for (int a=0; a<n; a++) {
 					points[a].category = (int) ((Math.random()*k));
 				}
+
+				//assure that every cluster has at least one member
+				for (int a=0; a<n; a++) {
+					randomIndex = (int) ((Math.random()*n));
+					points[randomIndex].category = a;
+				}
 				
 				Boolean change = true;
 
@@ -243,6 +257,8 @@ public class Main {
 						}
 	
 					}
+
+					centroid_it.add(centroids);
 
 					//Zuordnung der Datenpunkte
 					for (int j = 0; j<n; j++) {
@@ -274,6 +290,8 @@ public class Main {
 								change = true;
 						}
 					}
+
+					points_it.add(points);
 	
 				}
 			} else {
@@ -304,6 +322,8 @@ public class Main {
 					while (change) {
 
 						change = false;
+
+						centroid_it.add(centroids);
 
 						//Zuordnung der Datenpunkte
 						for (int j = 0; j<n; j++) {
@@ -356,6 +376,8 @@ public class Main {
 							}
 						}
 
+						points_it.add(points);
+
 						count++;
 						System.out.println("Iterate " + count + "\n");	
 					}
@@ -400,6 +422,8 @@ public class Main {
 	
 						//iterate until there is no change in category
 						while (change) {
+
+							centroid_it.add(centroids);
 
 							change = false;
 
@@ -452,6 +476,8 @@ public class Main {
 										}
 								}
 							}
+
+							points_it.add(points);
 			
 							count++;
 							System.out.println("Iterate " + count + "\n");	
