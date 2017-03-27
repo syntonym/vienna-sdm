@@ -31,7 +31,7 @@ public class Main {
 		    strat= Strategy.valueOf(args[3]);
 		    init = Initialisation.valueOf(args[4]);
 	    } else {
-	        n = 4000;
+	        n = 40;
 	        dimensions = 2;
 	        k = 4;
 	        strat = Strategy.LLOYD;
@@ -46,6 +46,8 @@ public class Main {
 		k = reader.nextInt(); // Scans the next token of the input as an int.
 
 		algoKMeans(points, init, strat, k, n, points_it, centroid_it);
+		
+		visualize(points, init, strat, n, k);
 	}
 
 	/**
@@ -514,9 +516,6 @@ public class Main {
 	 * @param strategy       strategy to update k-means algo
 	 **/
 	public static void visualize(Point[] points, Initialisation initialisation, Strategy strategy, int n, int k) {
-	    System.out.println("line missing");
-	    Visualizer visualizer = new Visualizer();
-	    
 	    Visualizer.setInformation(
 	        strategy.name(), 
 	        initialisation.name(), 

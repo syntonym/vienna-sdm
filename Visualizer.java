@@ -30,6 +30,14 @@ public class Visualizer extends PApplet
     
     }
     
+    public static void updatePoints (Point [] pointsNew) {
+        points = pointsNew;
+        System.out.println("points updated");
+        for (int i = 0; i < points.length; i++) {
+            System.out.println(points[i].category);
+        }
+    }
+    
     public static void setInformation (
         String strategy, 
         String initialisation, 
@@ -69,13 +77,14 @@ public class Visualizer extends PApplet
             points[i].values[1] *= 768/(2*(max_y - min_y));
         }
 
+/*
         for (int i = 0; i < points.length; i++) {
             System.out.println(points[i].values[0] + ":" + points[i].values[1]);
         }
+*/
     }
     
     public static void main (String[] args) {
-        System.out.println("moin");
         PApplet.main(args);
     }
     
@@ -88,9 +97,8 @@ public class Visualizer extends PApplet
         textSize (16);
         noStroke();
     }
-
+    
     public void draw(){
-        fill (0);
 
         for (int i = 0; i < points.length; i++) {
             if (points[i].category >= 0) {
@@ -99,6 +107,8 @@ public class Visualizer extends PApplet
                     colors[points[i].category][1],
                     colors[points[i].category][2]
                 );
+            } else {
+                fill (0);
             }
             
             ellipse(new Float(points[i].values[0]), new Float(points[i].values[1]), 3, 3);
@@ -112,5 +122,7 @@ public class Visualizer extends PApplet
             10, 
             26
         );
+        
+        
     }
 }
