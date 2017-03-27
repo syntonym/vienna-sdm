@@ -35,7 +35,7 @@ public class Main {
 	        dimensions = 2;
 	        k = 4;
 	        strat = Strategy.LLOYD;
-	        init = Initialisation.RANDOM_PARTITION;
+	        init = Initialisation.RANDOM_CLUSTER_CENTERS;
 	    }
 		
 		Point[] points = generateData(k, n, dimensions);
@@ -206,7 +206,7 @@ public class Main {
 				}
 
 				count++;
-				System.out.println("Iterate " + count + "\n");	
+				//System.out.println("Iterate " + count + "\n");	
 	
 			}
 
@@ -379,7 +379,7 @@ public class Main {
 						points_it.add(points);
 
 						count++;
-						System.out.println("Iterate " + count + "\n");	
+						//System.out.println("Iterate " + count + "\n");	
 					}
 				} else {
 					if (strategy == Strategy.MACQUEEN && initialisation == Initialisation.RANDOM_PARTITION) {
@@ -480,7 +480,7 @@ public class Main {
 							points_it.add(points);
 			
 							count++;
-							System.out.println("Iterate " + count + "\n");	
+							//System.out.println("Iterate " + count + "\n");	
 	
 						}
 					}	
@@ -490,7 +490,7 @@ public class Main {
 		}
 
 		for (int index=0; index<n; index++) {
-			System.out.println("Point " + index + " Cluster " + points[index].category +"\n");
+			//System.out.println("Point " + index + " Cluster " + points[index].category +"\n");
 		}
 
 	}
@@ -514,7 +514,7 @@ public class Main {
 	 * @param strategy       strategy to update k-means algo
 	 **/
 	public static void visualize(Point[] points, Initialisation initialisation, Strategy strategy, int n, int k) {
-	    System.out.println("line missing");
+	    //System.out.println("line missing");
 	    Visualizer visualizer = new Visualizer();
 	    
 	    Visualizer.setInformation(

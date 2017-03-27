@@ -43,7 +43,7 @@ public class Visualizer extends PApplet
         kString = k;
         points = pointsBla;
         
-        System.out.println(pointsBla.length);
+//        System.out.println(pointsBla.length);
         
         float max_x = 0;
         float min_x = 0;
@@ -70,12 +70,11 @@ public class Visualizer extends PApplet
         }
 
         for (int i = 0; i < points.length; i++) {
-            System.out.println(points[i].values[0] + ":" + points[i].values[1]);
+            //System.out.println(points[i].values[0] + ":" + points[i].values[1]);
         }
     }
     
     public static void main (String[] args) {
-        System.out.println("moin");
         PApplet.main(args);
     }
     
@@ -91,9 +90,9 @@ public class Visualizer extends PApplet
 
     public void draw(){
         fill (0);
-
+        
         for (int i = 0; i < points.length; i++) {
-            if (points[i].category >= 0) {
+            if (points[i].category >= 0 && points[i].category < 8) {
                 fill(
                     colors[points[i].category][0],
                     colors[points[i].category][1],
