@@ -20,8 +20,8 @@ public class Main {
 		int k;
 		Strategy strat;
 		Initialisation init;
-		ArrayList<Point[]> points_it = new ArrayList<Point[]>();
-		ArrayList<Point[]> centroid_it = new ArrayList<Point[]>();
+		ArrayList<ArrayList<Integer>> points_it = new ArrayList<ArrayList<Integer>>();
+		ArrayList<ArrayList<Point>> centroid_it = new ArrayList<ArrayList<Point>>();
 		
 	    
 	    if (args.length == 5) {
@@ -39,14 +39,20 @@ public class Main {
 	    }
 		
 		Point[] points = generateData(k, n, dimensions);
-		visualize(points, init, strat, n, k);
+		visualize(points, init, strat, n, k, points_it, centroid_it);
 
 		Scanner reader = new Scanner(System.in);  // Reading from System.in
 		System.out.println("Enter a number: ");
 		k = reader.nextInt(); // Scans the next token of the input as an int.
 
 		algoKMeans(points, init, strat, k, n, points_it, centroid_it);
-	}
+/*
+		for (int j = 0; j < points_it.size(); j++){	
+			for (int i = 0; i < points_it.get(j).size(); i++) {
+				System.out.println(j+": Kategorie: " + points_it.get(j).get(i));
+			}
+		}
+*/	}
 
 	/**
 	 * return generated point data (exercise part 1)
@@ -118,7 +124,9 @@ public class Main {
 	 * @param points Array of points to cluster
 	 *
 	 **/
-	public static void algoKMeans(Point[] points, Initialisation initialisation, Strategy strategy, int k, int n, ArrayList<Point[]> points_it, ArrayList<Point[]> centroid_it) {
+	public static void algoKMeans(Point[] points, Initialisation initialisation, Strategy strategy, int k, int n, ArrayList<ArrayList<Integer>> points_it, ArrayList<ArrayList<Point>> centroid_it) {
+
+		int count = 0;
 
 		if (strategy == Strategy.LLOYD && initialisation == Initialisation.RANDOM_CLUSTER_CENTERS) {
 
@@ -143,12 +151,15 @@ public class Main {
 			}
 
 			Boolean change = true;
-			int count = 0;
 
 			//iterate until there is no change in category
 			while (change) {
 
-				centroid_it.add(centroids);
+				//centroid_it.add(centroids);
+				centroid_it.add(new ArrayList<Point>());
+				for (int j = 0; j < centroids.length; j++) {
+					centroid_it.get(count).add(new Point(centroids[j]));
+				}
 
 				change = false;
 
@@ -183,7 +194,12 @@ public class Main {
 					}
 				}
 
-				points_it.add(points);
+				//points_it.add(points);
+
+				points_it.add(new ArrayList<Integer>());
+				for (int j = 0; j < points.length; j++) {
+					points_it.get(count).add(new Integer(points[j].category));
+				}
 
 
 				//Neu Berechnung der Centroide
@@ -206,7 +222,7 @@ public class Main {
 				}
 
 				count++;
-				//System.out.println("Iterate " + count + "\n");	
+				System.out.println("Iterate " + count + "\n");	
 	
 			}
 
@@ -258,7 +274,10 @@ public class Main {
 	
 					}
 
-					centroid_it.add(centroids);
+					centroid_it.add(new ArrayList<Point>());
+					for (int j = 0; j < centroids.length; j++) {
+						centroid_it.get(count).add(new Point(centroids[j]));
+					}
 
 					//Zuordnung der Datenpunkte
 					for (int j = 0; j<n; j++) {
@@ -291,8 +310,12 @@ public class Main {
 						}
 					}
 
-					points_it.add(points);
-	
+					points_it.add(new ArrayList<Integer>());
+					for (int j = 0; j < points.length; j++) {
+						points_it.get(count).add(new Integer(points[j].category));
+					}
+
+					count++;
 				}
 			} else {
 				if (strategy == Strategy.MACQUEEN && initialisation == Initialisation.RANDOM_CLUSTER_CENTERS) {
@@ -316,14 +339,16 @@ public class Main {
 					}
 
 					Boolean change = true;
-					int count = 0;
 
 					//iterate until there is no change in category
 					while (change) {
 
 						change = false;
 
-						centroid_it.add(centroids);
+						centroid_it.add(new ArrayList<Point>());
+						for (int j = 0; j < centroids.length; j++) {
+							centroid_it.get(count).add(new Point(centroids[j]));
+						}
 
 						//Zuordnung der Datenpunkte
 						for (int j = 0; j<n; j++) {
@@ -376,7 +401,10 @@ public class Main {
 							}
 						}
 
-						points_it.add(points);
+						points_it.add(new ArrayList<Integer>());
+						for (int j = 0; j < points.length; j++) {
+							points_it.get(count).add(new Integer(points[j].category));
+						}
 
 						count++;
 						//System.out.println("Iterate " + count + "\n");	
@@ -418,12 +446,14 @@ public class Main {
 						}
 				
 						Boolean change = true;
-						int count = 0;
 	
 						//iterate until there is no change in category
 						while (change) {
 
-							centroid_it.add(centroids);
+							centroid_it.add(new ArrayList<Point>());
+							for (int j = 0; j < centroids.length; j++) {
+								centroid_it.get(count).add(new Point(centroids[j]));
+							}
 
 							change = false;
 
@@ -477,7 +507,10 @@ public class Main {
 								}
 							}
 
-							points_it.add(points);
+							points_it.add(new ArrayList<Integer>());
+							for (int j = 0; j < points.length; j++) {
+								points_it.get(count).add(new Integer(points[j].category));
+							}
 			
 							count++;
 							//System.out.println("Iterate " + count + "\n");	
@@ -513,20 +546,22 @@ public class Main {
 	 * @param initialisation strategy to initialisation k-means algo
 	 * @param strategy       strategy to update k-means algo
 	 **/
-	public static void visualize(Point[] points, Initialisation initialisation, Strategy strategy, int n, int k) {
-	    //System.out.println("line missing");
-	    Visualizer visualizer = new Visualizer();
+	public static void visualize(Point[] points, Initialisation initialisation, Strategy strategy, int n, int k, ArrayList<ArrayList<Integer>> points_it, ArrayList<ArrayList<Point>> centroid_it) {
+	//System.out.println("line missing");
+	Visualizer visualizer = new Visualizer();
 	    
-	    Visualizer.setInformation(
-	        strategy.name(), 
-	        initialisation.name(), 
-	        new Integer(n).toString(), 
-	        new Integer(k).toString(),
-	        points
-        );
+	Visualizer.setInformation(
+		strategy.name(), 
+		initialisation.name(), 
+		new Integer(n).toString(), 
+		new Integer(k).toString(),
+		points,
+		points_it,
+		centroid_it		
+	);
         
         
-	    Visualizer.main("Visualizer");
+	Visualizer.main("Visualizer");
 	}
 }
 
