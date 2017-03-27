@@ -279,6 +279,11 @@ public class Main {
 						centroid_it.get(count).add(new Point(centroids[j]));
 					}
 
+					points_it.add(new ArrayList<Integer>());
+					for (int j = 0; j < points.length; j++) {
+						points_it.get(count).add(new Integer(points[j].category));
+					}
+
 					//Zuordnung der Datenpunkte
 					for (int j = 0; j<n; j++) {
 
@@ -308,11 +313,6 @@ public class Main {
 						if (points[j].category != points[j].category_change) {
 								change = true;
 						}
-					}
-
-					points_it.add(new ArrayList<Integer>());
-					for (int j = 0; j < points.length; j++) {
-						points_it.get(count).add(new Integer(points[j].category));
 					}
 
 					count++;
@@ -455,8 +455,14 @@ public class Main {
 								centroid_it.get(count).add(new Point(centroids[j]));
 							}
 
+							points_it.add(new ArrayList<Integer>());
+							for (int j = 0; j < points.length; j++) {
+								points_it.get(count).add(new Integer(points[j].category));
+							}
+
 							change = false;
 
+							
 							//Zuordnung der Datenpunkte
 							for (int j = 0; j<n; j++) {
 
@@ -505,11 +511,6 @@ public class Main {
 	
 										}
 								}
-							}
-
-							points_it.add(new ArrayList<Integer>());
-							for (int j = 0; j < points.length; j++) {
-								points_it.get(count).add(new Integer(points[j].category));
 							}
 			
 							count++;
