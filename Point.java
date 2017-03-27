@@ -32,4 +32,16 @@ public class Point {
 		this.category_change = -1;
 		this.dim = dimensions;
 	}
+
+	public Point(Point origin) {
+		this.values = new double[origin.dim];
+		for (int i = 0; i < origin.dim; i++) {
+			this.values[i] = origin.values[i];
+		}
+		this.category = origin.category;
+		this.original_category = origin.original_category;
+		this.category_change = origin.category_change;
+		this.dim = origin.dim;
+	}
+
 }
