@@ -44,6 +44,7 @@ public class Main {
 		Scanner reader = new Scanner(System.in);  // Reading from System.in
 		System.out.println("Enter a number: ");
 		k = reader.nextInt(); // Scans the next token of the input as an int.
+		Visualizer.updateK(new Integer(k).toString());
 
 		algoKMeans(points, init, strat, k, n, points_it, centroid_it);
 /*

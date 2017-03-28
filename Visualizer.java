@@ -32,6 +32,10 @@ public class Visualizer extends PApplet
     public Visualizer () {
     
     }
+
+	public static void updateK (String k) {
+		kString = k;
+	}
     
     public static void setInformation (
         String strategy, 
