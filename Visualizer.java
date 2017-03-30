@@ -32,6 +32,10 @@ public class Visualizer extends PApplet
     public Visualizer () {
     
     }
+
+	public static void updateK (String k) {
+		kString = k;
+	}
     
     public static void setInformation (
         String strategy, 
@@ -103,7 +107,7 @@ public class Visualizer extends PApplet
     }
 
 	public void keyReleased () {
-		if (key == ENTER) it_counter = (++it_counter) % points_it.size();
+		if (key == ENTER && points_it.size() != 0) it_counter = (++it_counter) % points_it.size();
 	}
 
     public void draw(){
@@ -157,7 +161,7 @@ public class Visualizer extends PApplet
 		    text(
 		        "Strategy: " + strategyName + ", Initialisation: " + 
 		            initialisationName + ", n=" + nString + ", k=" + 
-					kString + ", step=" + it_counter + " HIT ENTER TO ITERATE", 
+					kString + ", step=" + (it_counter+1) + " HIT ENTER TO ITERATE", 
 		        10, 
 		        26
 		    );
@@ -165,7 +169,7 @@ public class Visualizer extends PApplet
 		    text(
 		        "Strategy: " + strategyName + ", Initialisation: " + 
 		            initialisationName + ", n=" + nString + ", k=" + 
-					kString + ", step=" + it_counter + " FINAL STEP REACHED", 
+					kString + ", step=" + (it_counter+1) + " FINAL STEP REACHED", 
 		        10, 
 		        26
 		    );
@@ -173,7 +177,7 @@ public class Visualizer extends PApplet
 		    text(
 		        "Strategy: " + strategyName + ", Initialisation: " + 
 		            initialisationName + ", n=" + nString + ", k=" + 
-					kString + ", step=" + it_counter, 
+					kString + ", step=" + (it_counter+1), 
 		        10, 
 		        26
 		    );
