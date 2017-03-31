@@ -47,13 +47,7 @@ public class Main {
 		Visualizer.updateK(new Integer(k).toString());
 
 		algoKMeans(points, init, strat, k, n, points_it, centroid_it);
-/*
-		for (int j = 0; j < points_it.size(); j++){	
-			for (int i = 0; i < points_it.get(j).size(); i++) {
-				System.out.println(j+": Kategorie: " + points_it.get(j).get(i));
-			}
-		}
-*/	}
+	}
 
 	/**
 	 * return generated point data (exercise part 1)
@@ -313,6 +307,7 @@ public class Main {
 					}
 
 					count++;
+					System.out.println("Iterate " + count + "\n");
 				}
 			} else {
 				if (strategy == Strategy.MACQUEEN && initialisation == Initialisation.RANDOM_CLUSTER_CENTERS) {
