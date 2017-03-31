@@ -50,7 +50,7 @@ public class Main {
 /*
 		for (int j = 0; j < points_it.size(); j++){	
 			for (int i = 0; i < points_it.get(j).size(); i++) {
-				System.out.println(j+": Kategorie: " + points_it.get(j).get(i));
+				//System.out.println(j+": Kategorie: " + points_it.get(j).get(i));
 			}
 		}
 */	}
@@ -507,7 +507,7 @@ public class Main {
 							}
 			
 							count++;
-							System.out.println("Iterate " + count + "\n");	
+							//System.out.println("Iterate " + count + "\n");	
 	
 						}
 					}	
