@@ -3,8 +3,8 @@ import java.util.*;
 
 public class Visualizer extends PApplet
 {
-	private final int sizeX = 1024;
-	private final int sizeY = 768;
+	private final int sizeX = 500;
+	private final int sizeY = 500;
     
 	private static String strategyName = new String();
 	private static String initialisationName = new String();
@@ -69,8 +69,8 @@ public class Visualizer extends PApplet
         for (int i = 0; i < points.length; i++) {
 	    	points[i].values[0] += -min_x + 50;
 	    	points[i].values[1] += -min_y + 50;
-        	points[i].values[0] *= 1024/(2*(max_x - min_x));
-            points[i].values[1] *= 768/(2*(max_y - min_y));
+        	points[i].values[0] *= 500/(2*(max_x - min_x));
+            points[i].values[1] *= 500/(2*(max_y - min_y));
         }
 /*
 		for (int j = 0; j < points_it.size(); j++){	
@@ -87,8 +87,8 @@ public class Visualizer extends PApplet
 			for (int i = 0; i < centroid_it.get(j).size(); i++) {
 	    		centroid_it.get(j).get(i).values[0] += -min_x + 50;
 	    		centroid_it.get(j).get(i).values[1] += -min_y + 50;
-        		centroid_it.get(j).get(i).values[0] *= 1024/(2*(max_x - min_x));
-            	centroid_it.get(j).get(i).values[1] *= 768/(2*(max_y - min_y));
+        		centroid_it.get(j).get(i).values[0] *= 500/(2*(max_x - min_x));
+            	centroid_it.get(j).get(i).values[1] *= 500/(2*(max_y - min_y));
         	}
 		}
 
@@ -113,6 +113,7 @@ public class Visualizer extends PApplet
     public void draw(){
         background(255);
         fill (0);
+		scale( (float) 1.1, (float) 1.1);
         
         noStroke();
         for (int i = 0; i < points.length; i++) {
@@ -148,8 +149,8 @@ public class Visualizer extends PApplet
 	            rect(
 					new Float(centroid_it.get(it_counter).get(i).values[0]), 
 					new Float(centroid_it.get(it_counter).get(i).values[1]), 
-					3, 
-					3
+					5, 
+					5
 				);
 			}
 		}
@@ -159,27 +160,27 @@ public class Visualizer extends PApplet
         
 		if (it_counter == -1) {
 		    text(
-		        "Strategy: " + strategyName + ", Initialisation: " + 
-		            initialisationName + ", n=" + nString + ", k=" + 
+		        "Strategy: " + strategyName + "\nInitialisation: " + 
+		            initialisationName + "\nn=" + nString + ", k=" + 
 					kString + ", step=" + (it_counter+1) + " HIT ENTER TO ITERATE", 
-		        10, 
-		        26
+		        6, 
+		        20
 		    );
 		} else if (it_counter == points_it.size() - 1) {
 		    text(
-		        "Strategy: " + strategyName + ", Initialisation: " + 
-		            initialisationName + ", n=" + nString + ", k=" + 
+		        "Strategy: " + strategyName + "\nInitialisation: " + 
+		            initialisationName + "\nn=" + nString + ", k=" + 
 					kString + ", step=" + (it_counter+1) + " FINAL STEP REACHED", 
-		        10, 
-		        26
+		        6, 
+		        20
 		    );
 		} else {
 		    text(
-		        "Strategy: " + strategyName + ", Initialisation: " + 
-		            initialisationName + ", n=" + nString + ", k=" + 
+		        "Strategy: " + strategyName + "\nInitialisation: " + 
+		            initialisationName + "\nn=" + nString + ", k=" + 
 					kString + ", step=" + (it_counter+1), 
-		        10, 
-		        26
+		        6, 
+		        20
 		    );
 		}
     }
