@@ -27,7 +27,7 @@ public class Main {
 	    if (args.length == 5) {
 		    n = Integer.parseInt(args[0]);
 		    dimensions = Integer.parseInt(args[1]);
-		    k = (int) Integer.parseInt(args[2]);
+		    k = Integer.parseInt(args[2]);
 		    strat= Strategy.valueOf(args[3]);
 		    init = Initialisation.valueOf(args[4]);
 	    } else {
@@ -39,12 +39,12 @@ public class Main {
 	    }
 		
 		Point[] points = generateData(k, n, dimensions);
-		visualize(points, init, strat, n, k, points_it, centroid_it);
+		//visualize(points, init, strat, n, k, points_it, centroid_it);
 
-		Scanner reader = new Scanner(System.in);  // Reading from System.in
-		System.out.println("Enter a number: ");
-		k = reader.nextInt(); // Scans the next token of the input as an int.
-		Visualizer.updateK(new Integer(k).toString());
+		//Scanner reader = new Scanner(System.in);  // Reading from System.in
+		//System.out.println("Enter a number: ");
+		//reader.nextInt(); // Scans the next token of the input as an int.
+		//Visualizer.updateK(new Integer(k).toString());
 
 		algoKMeans(points, init, strat, k, n, points_it, centroid_it);
 /*
@@ -223,8 +223,6 @@ public class Main {
 				}
 
 				count++;
-				System.out.println("Iterate " + count + "\n");	
-	
 			}
 
 		} else {
@@ -528,6 +526,7 @@ public class Main {
 			//System.out.println("Point " + index + " Cluster " + points[index].category +"\n");
 		}
 
+		System.out.println(count);
 	}
 
 	/**
