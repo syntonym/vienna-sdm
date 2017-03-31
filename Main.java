@@ -195,8 +195,6 @@ public class Main {
 					}
 				}
 
-				//points_it.add(points);
-
 				points_it.add(new ArrayList<Integer>());
 				for (int j = 0; j < points.length; j++) {
 					points_it.get(count).add(new Integer(points[j].category));
@@ -205,7 +203,7 @@ public class Main {
 
 				//Neu Berechnung der Centroide
 
-				for (int z=0; z<2; z++) { //2 <- dimensions
+				for (int z=0; z<points[0].dim; z++) {
 					for (int y = 0; y<k; y++) {
 						double mean = 0;
 						double elementCount = 0;
@@ -218,10 +216,8 @@ public class Main {
 						}
 						centroids[y].values[z] = mean / elementCount;
 	
-					}
-	
+					}	
 				}
-
 				count++;
 				System.out.println("Iterate " + count + "\n");	
 	
@@ -258,7 +254,7 @@ public class Main {
 
 					//Neu Berechnung der Centroide
 
-					for (int z=0; z<2; z++) { //2 <- dimensions
+					for (int z=0; z<points[0].dim; z++) {
 						for (int y = 0; y<k; y++) {
 							double mean = 0;
 							double elementCount = 0;
@@ -382,7 +378,7 @@ public class Main {
 				
 								//if there's a change -> calculate centroids
 
-								for (int z=0; z<2; z++) { //2 <- dimensions
+								for (int z=0; z<points[0].dim; z++) { 
 									for (int y = 0; y<k; y++) {
 										double mean = 0;
 										double elementCount = 0;
@@ -395,8 +391,7 @@ public class Main {
 										}
 										centroids[y].values[z] = mean / elementCount;
 	
-									}
-	
+									}	
 								}
 
 							}
@@ -408,7 +403,7 @@ public class Main {
 						}
 
 						count++;
-						//System.out.println("Iterate " + count + "\n");	
+						System.out.println("Iterate " + count + "\n");	
 					}
 				} else {
 					if (strategy == Strategy.MACQUEEN && initialisation == Initialisation.RANDOM_PARTITION) {
@@ -442,8 +437,7 @@ public class Main {
 								}	
 								centroids[y].values[z] = mean / elementCount;
 	
-							}
-	
+							}	
 						}
 				
 						Boolean change = true;
@@ -469,7 +463,7 @@ public class Main {
 
 								double distance = Double.MAX_VALUE;
 								double distance_old = distance;
-								double[] vector = new double[2];
+								double[] vector = new double[points[0].dim];
 								points[j].category_change = points[j].category;
 
 								for (int l = 0; l < k; l++) {
@@ -515,7 +509,7 @@ public class Main {
 							}
 			
 							count++;
-							//System.out.println("Iterate " + count + "\n");	
+							System.out.println("Iterate " + count + "\n");	
 	
 						}
 					}	
@@ -523,11 +517,6 @@ public class Main {
 
 			}
 		}
-
-		for (int index=0; index<n; index++) {
-			//System.out.println("Point " + index + " Cluster " + points[index].category +"\n");
-		}
-
 	}
 
 	/**
@@ -549,7 +538,7 @@ public class Main {
 	 * @param strategy       strategy to update k-means algo
 	 **/
 	public static void visualize(Point[] points, Initialisation initialisation, Strategy strategy, int n, int k, ArrayList<ArrayList<Integer>> points_it, ArrayList<ArrayList<Point>> centroid_it) {
-	//System.out.println("line missing");
+
 	Visualizer visualizer = new Visualizer();
 	    
 	Visualizer.setInformation(
