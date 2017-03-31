@@ -13,4 +13,7 @@ clean:
 main.jar: Main.class Point.class Visualizer.class
 	jar cef Main main.jar *.class
 
-all: main.jar
+run: Main.class Point.class Visualizer.class
+	java Main
+
+all: run
