@@ -38,21 +38,21 @@ public class Visualizer extends PApplet
 	}
     
     public static void setInformation (
-        String strategy, 
-        String initialisation, 
-        String n, 
-        String k, 
-        Point [] pointsBla,
-	ArrayList<ArrayList<Integer>> points_itBla,
-	ArrayList<ArrayList<Point>> centroid_itBla
+		String strategy, 
+		String initialisation, 
+		String n, 
+		String k, 
+		Point [] pointsBla,
+		ArrayList<ArrayList<Integer>> points_itBla,
+		ArrayList<ArrayList<Point>> centroid_itBla
     ) {
-        strategyName = strategy;
-        initialisationName = initialisation;
-        nString = n;
-        kString = k;
-	points = pointsBla;
-	centroid_it = centroid_itBla;
-	points_it = points_itBla;
+		strategyName = strategy;
+		initialisationName = initialisation;
+		nString = n;
+		kString = k;
+		points = pointsBla;
+		centroid_it = centroid_itBla;
+		points_it = points_itBla;
         
         float max_x = 0;
         float min_x = 0;
@@ -72,22 +72,12 @@ public class Visualizer extends PApplet
         	points[i].values[0] *= 400/(2*(max_x - min_x));
 		points[i].values[1] *= 400/(2*(max_y - min_y));
         }
-/*
-		for (int j = 0; j < points_it.size(); j++){	
-			for (int i = 0; i < points_it.get(j).length; i++) {
-				System.out.println(j+": Kategorie: " + points_it.get(j)[i].category);
-	    		points_it.get(j)[i].values[0] += -min_x + 50;
-	    		points_it.get(j)[i].values[1] += -min_y + 50;
-        		points_it.get(j)[i].values[0] *= 1024/(2*(max_x - min_x));
-            	points_it.get(j)[i].values[1] *= 768/(2*(max_y - min_y));
-        	}
-		}
-*/
+
 		for (int j = 0; j < centroid_it.size(); j++){		
 			for (int i = 0; i < centroid_it.get(j).size(); i++) {
-	    		centroid_it.get(j).get(i).values[0] += -min_x + 50;
-	    		centroid_it.get(j).get(i).values[1] += -min_y + 50;
-        		centroid_it.get(j).get(i).values[0] *= 400/(2*(max_x - min_x));
+					centroid_it.get(j).get(i).values[0] += -min_x + 50;
+					centroid_it.get(j).get(i).values[1] += -min_y + 50;
+					centroid_it.get(j).get(i).values[0] *= 400/(2*(max_x - min_x));
             		centroid_it.get(j).get(i).values[1] *= 400/(2*(max_y - min_y));
         	}
 		}

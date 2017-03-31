@@ -42,7 +42,7 @@ public class Main {
 		visualize(points, init, strat, n, k, points_it, centroid_it);
 
 		Scanner reader = new Scanner(System.in);  // Reading from System.in
-		System.out.println("Enter a number: ");
+		System.out.println("Enter a number (k <- number of clusters): ");
 		k = reader.nextInt(); // Scans the next token of the input as an int.
 		Visualizer.updateK(new Integer(k).toString());
 
@@ -194,9 +194,7 @@ public class Main {
 					points_it.get(count).add(new Integer(points[j].category));
 				}
 
-
 				//Neu Berechnung der Centroide
-
 				for (int z=0; z<points[0].dim; z++) {
 					for (int y = 0; y<k; y++) {
 						double mean = 0;
@@ -247,7 +245,6 @@ public class Main {
 					change = false;
 
 					//Neu Berechnung der Centroide
-
 					for (int z=0; z<points[0].dim; z++) {
 						for (int y = 0; y<k; y++) {
 							double mean = 0;
@@ -372,7 +369,6 @@ public class Main {
 								change = true;
 				
 								//if there's a change -> calculate centroids
-
 								for (int z=0; z<points[0].dim; z++) { 
 									for (int y = 0; y<k; y++) {
 										double mean = 0;
@@ -418,8 +414,7 @@ public class Main {
 						}
 
 						//calculate centroids
-
-						for (int z=0; z<2; z++) { //2 <- dimensions
+						for (int z=0; z<points[0].dim; z++) {
 							for (int y = 0; y<k; y++) {
 								double mean = 0;
 								double elementCount = 0;
@@ -483,8 +478,7 @@ public class Main {
 										change = true;
 
 										//if there's a change -> calculate centroids
-
-										for (int z=0; z<2; z++) { //2 <- dimensions
+										for (int z=0; z<points[0].dim; z++) {
 											for (int y = 0; y<k; y++) {
 												double mean = 0;
 												double elementCount = 0;
