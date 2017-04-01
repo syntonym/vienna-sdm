@@ -29,14 +29,27 @@ public class Visualizer extends PApplet
             {64, 64, 128},
         };
     
-    public Visualizer () {
-    
-    }
-
+	/**
+	 * used to update the k-parameter in the visualization, so we can display the data points
+	 * before the algorithm has started calculating
+	 *
+	 * @param k     parameter k, number of centroids/clusters which is later parsed to integer
+	 **/
 	public static void updateK (String k) {
 		kString = k;
 	}
     
+    /**
+     * used to set all the necessary data for visualization
+     * 
+     * @param strategy          name of the used strategy
+     * @param initialisation    name of the used initialisation strategy
+     * @param n                 amount of data points
+     * @param k                 amount of centroids/clusters
+     * @param pointsBla         data points
+     * @param points_itBla      contains the nearest centroid of every point at each iteration
+     * @param centroid_itBla    contains the position of every centroid at each iteration
+     **/
     public static void setInformation (
 		String strategy, 
 		String initialisation, 
@@ -84,22 +97,37 @@ public class Visualizer extends PApplet
 
     }
     
+    /**
+     * main function like the framework defines it to be to work properly.
+     **/
     public static void main (String[] args) {
         PApplet.main(args);
     }
     
+    /**
+     * sets up the window size for the visualization
+     **/
     public void settings(){
         size(sizeX, sizeY);
     }
 
+    /**
+     * sets up text size of text used during the visualization
+     **/
     public void setup(){
         textSize (12);
     }
 
+    /**
+     * increases the iteration counter it_counter everytime somebody hits ENTER in the visualization window
+     **/
 	public void keyReleased () {
 		if (key == ENTER && points_it.size() != 0) it_counter = (++it_counter) % points_it.size();
 	}
 
+    /**
+     * function which is called in an endless loop by the processing framework which does the real visualization job
+     **/
     public void draw(){
         background(255);
         fill (0);
