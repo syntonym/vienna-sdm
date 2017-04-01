@@ -3,8 +3,8 @@ import java.util.*;
 
 public class Visualizer extends PApplet
 {
-	private final int sizeX = 400;
-	private final int sizeY = 400;
+	private static final int sizeX = 640;
+	private static final int sizeY = 640;
     
 	private static String strategyName = new String();
 	private static String initialisationName = new String();
@@ -69,16 +69,16 @@ public class Visualizer extends PApplet
         for (int i = 0; i < points.length; i++) {
 	    	points[i].values[0] += -min_x + 50;
 	    	points[i].values[1] += -min_y + 50;
-        	points[i].values[0] *= 400/(2*(max_x - min_x));
-		points[i].values[1] *= 400/(2*(max_y - min_y));
+        	points[i].values[0] *= sizeX/(2*(max_x - min_x));
+		    points[i].values[1] *= sizeY/(2*(max_y - min_y));
         }
 
 		for (int j = 0; j < centroid_it.size(); j++){		
 			for (int i = 0; i < centroid_it.get(j).size(); i++) {
 					centroid_it.get(j).get(i).values[0] += -min_x + 50;
 					centroid_it.get(j).get(i).values[1] += -min_y + 50;
-					centroid_it.get(j).get(i).values[0] *= 400/(2*(max_x - min_x));
-            		centroid_it.get(j).get(i).values[1] *= 400/(2*(max_y - min_y));
+					centroid_it.get(j).get(i).values[0] *= sizeX/(2*(max_x - min_x));
+            		centroid_it.get(j).get(i).values[1] *= sizeY/(2*(max_y - min_y));
         	}
 		}
 
@@ -103,7 +103,6 @@ public class Visualizer extends PApplet
     public void draw(){
         background(255);
         fill (0);
-		scale( (float) 1.2, (float) 1.2);
         
         noStroke();
         for (int i = 0; i < points.length; i++) {
@@ -125,7 +124,7 @@ public class Visualizer extends PApplet
 		        }
 			}
             
-            ellipse(new Float(points[i].values[0]), new Float(points[i].values[1]), 3, 3);
+            ellipse(new Float(points[i].values[0]), new Float(points[i].values[1]), 5, 5);
         }
         
 		stroke(0);
@@ -139,8 +138,8 @@ public class Visualizer extends PApplet
 	            rect(
 					new Float(centroid_it.get(it_counter).get(i).values[0]), 
 					new Float(centroid_it.get(it_counter).get(i).values[1]), 
-					5, 
-					5
+					8, 
+					8
 				);
 			}
 		}
